@@ -1,0 +1,7 @@
+.body {
+    min-height: calc(100vh - 50px);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+  }
