@@ -1,36 +1,40 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Card } from 'material-ui/Card';
 
 export default class HomeScreen extends Component {
 
     constructor(props) {
-      super(props);
-      this.state = {
-          file: '',
-          imagePreviewUrl: ''};
+        super(props);
+        this.state = {
+            file: '',
+            imagePreviewUrl: ''
+        };
     }
   
     _handleSubmit(e) {
-      e.preventDefault();
-      // TODO: do something with -> this.state.file
-      console.log('handle uploading-', this.state.file);
+        e.preventDefault();
+        // do something with this.state.file like send it to the api.
+        console.log('handle uploading-', this.state.file);
     }
   
     _handleImageChange(e) {
-      e.preventDefault();
-  
-      let reader = new FileReader();
-      let file = e.target.files[0];
-  
-      reader.onloadend = () => {
-        this.setState({
-          file: file,
-          imagePreviewUrl: reader.result
-        });
-      }
-  
-      reader.readAsDataURL(file)
+        e.preventDefault();
+
+        let reader = new FileReader();
+        let file = e.target.files[0];
+
+        reader.onloadend = () => {
+            this.setState({
+                file: file,
+                imagePreviewUrl: reader.result
+            });
+        }
+
+        if (file) {
+            reader.readAsDataURL(file)
+        } else {
+            return null;
+        }
     }
   
     render() {
@@ -71,39 +75,28 @@ export default class HomeScreen extends Component {
         }
   
       return (
-
-        <div className='container'>
-            <div className='row'>
-                <div className='col-12'>
-                    <Card className='center'>
-                        <form onSubmit={(e)=>this._handleSubmit(e)}>
-
-                            <div>
-                                {$imagePreview}
-                            </div>
-
-                            <input 
-                                type="file" 
-                                onChange={(e)=>this._handleImageChange(e)} 
-                            />
-
-                            <br /> 
-                            <br />
-
-                            <RaisedButton 
-                                className='center'
-                                type='submit'
-                                label='Upload Image'
-                                secondary={true}
-                                onClick={(e)=>this._handleSubmit(e)}
-                            />
-
-                            <br />
-
-                        </form>
-                    </Card>
+        <div className='outer-div'>
+            <form className='inner-div' onSubmit={(e)=>this._handleSubmit(e)}>
+                <h3>Upload an image</h3>
+                <div>
+                    {$imagePreview}
                 </div>
-            </div>
+
+                <input 
+                    type="file" 
+                    onChange={(e)=>this._handleImageChange(e)} 
+                />
+
+                <br /> 
+                <br />
+
+                <RaisedButton 
+                    type='submit'
+                    label='Upload Image'
+                    secondary={true}
+                    onClick={(e)=>this._handleSubmit(e)}
+                />
+            </form>
         </div>
       )
     }

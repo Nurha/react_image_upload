@@ -5,3 +5,16 @@
     display: flex;
     font-family: 'Roboto', sans-serif;
   }
+
+  .outer-div
+  {
+       padding: 30px;
+       text-align: center;
+       border: solid #fff 2px;
+       background-color: #fff
+  }
+  .inner-div
+  {
+       display: inline-block;
+       padding: 50px;
+  }
